@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>RadarBets - Nova Aposta</title>
+<title>RadarBets - Novo Bilhete</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -16,17 +16,21 @@
 
 <header class="topo">
 
-<h1>🎯 Nova Aposta</h1>
+<h1>🎫 Novo Bilhete</h1>
 
-<p>Cadastre uma nova aposta</p>
+<p>Monte seu bilhete de apostas</p>
 
 </header>
 
 <div class="container">
 
+<!-- ==========================
+     NOVA SELEÇÃO
+========================== -->
+
 <div class="card">
 
-<h2>📝 Informações da Aposta</h2>
+<h2>➕ Nova Seleção</h2>
 
 <label>📅 Data</label>
 
@@ -69,13 +73,67 @@ placeholder="Brasileirão Série A">
 
 </select>
 
-<label>📈 Odd</label>
+<label>📈 Odd da Seleção</label>
 
 <input
 id="odd"
 type="number"
 step="0.01"
 placeholder="1.80">
+
+<br><br>
+
+<button id="btnAdicionar">
+
+➕ Adicionar ao Bilhete
+
+</button>
+
+</div>
+
+<!-- ==========================
+     BILHETE
+========================== -->
+
+<div class="card">
+
+<h2>🎫 Bilhete em Montagem</h2>
+
+<div id="listaBilhete">
+
+<p style="text-align:center;color:#888;">
+
+Nenhuma seleção adicionada.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ==========================
+     DADOS DO BILHETE
+========================== -->
+
+<div class="card">
+
+<h2>📋 Dados do Bilhete</h2>
+
+<p>
+
+Quantidade de Seleções:
+
+<strong id="qtdSelecoes">0</strong>
+
+</p>
+
+<label>📈 Odd Final</label>
+
+<input
+id="oddFinal"
+type="number"
+step="0.01"
+placeholder="Digite a odd final">
 
 <label>💵 Valor Apostado</label>
 
@@ -85,7 +143,7 @@ type="number"
 step="0.01"
 placeholder="50.00">
 
-<label>🏦 Casa de Aposta</label>
+<label>🏦 Casa de Apostas</label>
 
 <input
 id="casa"
@@ -97,15 +155,41 @@ placeholder="Betano">
 <textarea
 id="observacao"
 rows="4"
-placeholder="Observações da aposta..."></textarea>
+placeholder="Observações..."></textarea>
 
 </div>
 
+<!-- ==========================
+     RESUMO
+========================== -->
+
 <div class="card">
 
-<button id="btnSalvarAposta">
+<h2>💰 Resumo</h2>
 
-💾 Salvar Aposta
+<p>
+
+Retorno Previsto
+
+</p>
+
+<h2 id="retornoPrevisto">
+
+R$ 0,00
+
+</h2>
+
+</div>
+
+<!-- ==========================
+     SALVAR
+========================== -->
+
+<div class="card">
+
+<button id="btnSalvarBilhete">
+
+💾 Salvar Bilhete
 
 </button>
 

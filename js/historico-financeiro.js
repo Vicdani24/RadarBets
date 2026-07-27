@@ -1,6 +1,7 @@
 // =================================
 // RadarBets
 // Histórico Financeiro
+// Bilhetes
 // =================================
 
 const area = document.getElementById("listaApostas");
@@ -25,9 +26,9 @@ function carregarHistoricoFinanceiro(){
 
         <div class="card">
 
-            <h2>📭 Nenhuma aposta cadastrada</h2>
+            <h2>📭 Nenhum bilhete cadastrado</h2>
 
-            <p>Cadastre sua primeira aposta.</p>
+            <p>Cadastre seu primeiro bilhete.</p>
 
         </div>
 
@@ -37,43 +38,62 @@ function carregarHistoricoFinanceiro(){
 
     }
 
-    const apostas=[...banco.dados.carteira.apostas].reverse();
+    const bilhetes=[...banco.dados.carteira.apostas].reverse();
 
-    apostas.forEach(aposta=>{
+    bilhetes.forEach(bilhete=>{
 
-        const indiceOriginal =
-            banco.dados.carteira.apostas.findIndex(
-                a=>a.id===aposta.id
-            );
+        const indiceOriginal=
+        banco.dados.carteira.apostas.findIndex(
+            b=>b.id===bilhete.id
+        );
 
         let emoji="🟡";
         let classe="";
 
-        if(aposta.status==="green"){
+        if(bilhete.status==="green"){
+
             emoji="🟢";
             classe="green";
+
         }
 
-        if(aposta.status==="red"){
+        if(bilhete.status==="red"){
+
             emoji="🔴";
             classe="red";
+
         }
 
         area.innerHTML+=`
 
         <div class="card jogo ${classe}">
 
-            <h2>${emoji} ${aposta.jogo}</h2>
+            <h2>${emoji} Bilhete #${bilhete.id}</h2>
 
-            <p>🏆 ${aposta.campeonato}</p>
+            <p>📅 ${formatarData(bilhete.data)}</p>
 
-            <p>🎯 ${aposta.mercado}</p>
+            <p>⚽ ${bilhete.selecoes.length} seleção(ões)</p>
 
-            <p>📈 Odd ${aposta.odd}</p>
+            <p>📈 Odd Final:
+            <strong>${bilhete.oddFinal}</strong></p>
 
-            <p>💵 Apostado: R$ ${aposta.valor.toFixed(2)}</p>
+            <p>💵 Valor:
+            <strong>${moeda(bilhete.valor)}</strong></p>
 
-            <p>Status: <strong>${aposta.status}</strong></p>
+            <p>💰 Retorno:
+            <strong>${moeda(bilhete.retorno)}</strong></p>
+
+            <p>Status:
+            <strong>${bilhete.status}</strong></p>
+
+            <button
+            onclick="abrirBilhete(${indiceOriginal})">
+
+            👁️ Ver Bilhete
+
+            </button>
+
+            <br><br>
 
             <div class="linha">
 
@@ -101,6 +121,14 @@ function carregarHistoricoFinanceiro(){
 
                 </button>
 
+                <button
+                class="btn-excluir"
+                onclick="excluirAposta(${indiceOriginal})">
+
+                🗑️
+
+                </button>
+
             </div>
 
         </div>
@@ -108,6 +136,17 @@ function carregarHistoricoFinanceiro(){
         `;
 
     });
+
+}
+
+function abrirBilhete(indice){
+
+    localStorage.setItem(
+        "bilheteAtual",
+        indice
+    );
+
+    window.location.href="bilhete.html";
 
 }
 
@@ -132,21 +171,21 @@ function recalcularCarteira(){
 
     let saldo=carteira.bancaInicial;
 
-    carteira.apostas.forEach(aposta=>{
+    carteira.apostas.forEach(bilhete=>{
 
-        if(aposta.status==="green"){
+        if(bilhete.status==="green"){
 
             greens++;
 
-            saldo+=aposta.lucro;
+            saldo+=bilhete.lucro;
 
         }
 
-        if(aposta.status==="red"){
+        if(bilhete.status==="red"){
 
             reds++;
 
-            saldo-=aposta.valor;
+            saldo-=bilhete.valor;
 
         }
 
@@ -154,7 +193,8 @@ function recalcularCarteira(){
 
     carteira.saldo=saldo;
 
-    carteira.lucro=saldo-carteira.bancaInicial;
+    carteira.lucro=
+    saldo-carteira.bancaInicial;
 
     if(carteira.bancaInicial>0){
 
@@ -177,5 +217,43 @@ function recalcularCarteira(){
         carteira.winRate=0;
 
     }
+
+}
+
+function excluirAposta(indice){
+
+    if(!confirm(
+        "Deseja excluir este bilhete?"
+    )) return;
+
+    banco.dados.carteira.apostas.splice(indice,1);
+
+    recalcularCarteira();
+
+    banco.salvar();
+
+    carregarHistoricoFinanceiro();
+
+}
+
+function moeda(valor){
+
+    return Number(valor).toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+function formatarData(data){
+
+    if(!data) return "-";
+
+    const partes=data.split("-");
+
+    return partes[2]+"/"+partes[1]+"/"+partes[0];
 
 }
