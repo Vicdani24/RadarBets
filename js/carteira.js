@@ -91,3 +91,65 @@ function moeda(valor){
     });
 
 }
+
+// ===============================
+// Cadastro da banca inicial
+// ===============================
+
+const btnSalvarBanca = document.getElementById("btnSalvarBanca");
+
+if(btnSalvarBanca){
+
+    verificarBanca();
+
+    btnSalvarBanca.addEventListener("click", salvarBancaInicial);
+
+}
+
+function verificarBanca(){
+
+    const card = document.getElementById("cardBancaInicial");
+
+    if(!card) return;
+
+    if(banco.dados.carteira.bancaInicial > 0){
+
+        card.style.display = "none";
+
+    }
+
+}
+
+function salvarBancaInicial(){
+
+    const campo = document.getElementById("valorBanca");
+
+    const valor = parseFloat(campo.value);
+
+    if(isNaN(valor) || valor <= 0){
+
+        alert("Informe um valor válido.");
+
+        return;
+
+    }
+
+    banco.dados.carteira.bancaInicial = valor;
+
+    banco.dados.carteira.saldo = valor;
+
+    banco.dados.carteira.lucro = 0;
+
+    banco.dados.carteira.roi = 0;
+
+    banco.dados.carteira.winRate = 0;
+
+    banco.salvar();
+
+    carregarCarteira();
+
+    verificarBanca();
+
+    alert("✅ Banca cadastrada com sucesso!");
+
+}

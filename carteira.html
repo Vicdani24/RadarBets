@@ -24,6 +24,8 @@
 
 <div class="container">
 
+    <!-- Saldo -->
+
     <div class="card">
 
         <h2>💵 Saldo Atual</h2>
@@ -32,108 +34,122 @@
 
     </div>
 
-<div class="card" id="cardBancaInicial">
+    <!-- Cadastro da banca -->
 
-    <h2>🏦 Banca Inicial</h2>
+    <div class="card" id="cardBancaInicial">
 
-    <p>Informe o valor da sua banca para começar.</p>
+        <h2>🏦 Banca Inicial</h2>
 
-    <input
+        <p>Informe o valor da sua banca para começar.</p>
+
+        <input
         type="number"
         id="valorBanca"
         placeholder="Ex.: 500,00"
         step="0.01"
         min="0">
 
-    <br><br>
+        <br><br>
 
-    <button id="btnSalvarBanca">
+        <button id="btnSalvarBanca">
 
-        💾 Salvar Banca
+            💾 Salvar Banca
 
-    </button>
+        </button>
 
-</div>
+    </div>
 
-    <div class="card resumo-banca">
+    <!-- Indicadores -->
 
-        <div>
+    <div class="card">
 
-            <strong>Lucro</strong>
+        <h2>📈 Indicadores</h2>
 
-            <p id="lucroTotal">R$ 0,00</p>
+        <p>
 
-        </div>
+            <strong>Lucro</strong><br>
 
-<div class="card">
+            <span id="lucroTotal">R$ 0,00</span>
 
-<h2>📊 Resumo Geral</h2>
+        </p>
 
-<p>
+        <hr>
 
-📋 Total de apostas:
-<strong id="totalApostas">0</strong>
+        <p>
 
-</p>
+            <strong>ROI</strong><br>
 
-<p>
+            <span id="roiTotal">0%</span>
 
-🟢 Greens:
-<strong id="greens">0</strong>
+        </p>
 
-</p>
+        <hr>
 
-<p>
+        <p>
 
-🔴 Reds:
-<strong id="reds">0</strong>
+            <strong>Win Rate</strong><br>
 
-</p>
+            <span id="winRate">0%</span>
 
-<p>
+        </p>
 
-🟡 Pendentes:
-<strong id="pendentes">0</strong>
+    </div>
 
-</p>
+    <!-- Resumo -->
 
-</div>
+    <div class="card">
 
-        <div>
+        <h2>📊 Resumo Geral</h2>
 
-            <strong>ROI</strong>
+        <p>
 
-            <p id="roiTotal">0%</p>
+            📋 Total de apostas:
+            <strong id="totalApostas">0</strong>
 
-        </div>
+        </p>
 
-        <div>
+        <p>
 
-            <strong>Win Rate</strong>
+            🟢 Greens:
+            <strong id="greens">0</strong>
 
-            <p id="winRate">0%</p>
+        </p>
 
-        </div>
+        <p>
+
+            🔴 Reds:
+            <strong id="reds">0</strong>
+
+        </p>
+
+        <p>
+
+            🟡 Pendentes:
+            <strong id="pendentes">0</strong>
+
+        </p>
+
+    </div>
+
+    <!-- Botões -->
+
+    <div class="card">
+
+        <button onclick="window.location.href='nova-aposta.html'">
+
+            🎯 Nova Aposta
+
+        </button>
 
     </div>
 
     <div class="card">
 
-<button onclick="window.location.href='nova-aposta.html'">
+        <button onclick="window.location.href='historico-financeiro.html'">
 
-🎯 Nova Aposta
+            📜 Histórico Financeiro
 
-</button>
-
-    </div>
-
-    <div class="card">
-
-<button onclick="window.location.href='historico-financeiro.html'">
-
-📜 Histórico Financeiro
-
-</button>
+        </button>
 
     </div>
 
